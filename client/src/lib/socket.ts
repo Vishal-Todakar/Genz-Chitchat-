@@ -1,0 +1,41 @@
+/**
+ * Socket.IO client singleton.
+ * Manages a single connection to the server with auto-reconnect.
+ */
+import { io, Socket } from 'socket.io-client';
+
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+
+let socket: Socket | null = null;
+
+export function getSocket(): Socket {
+  if (!socket) {
+    socket = io(SERVER_URL, {
+      autoConnect: false,
+      reconnection: true,
+      reconnectionAttempts: 10,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 10000,
+      transports: ['websocket', 'polling'],
+    });
+  }
+  return socket;
+}
+
+export function connectSocket(fingerprint: string): Socket {
+  const s = getSocket();
+  if (!s.connected) {
+    s.auth = { fingerprint };
+    s.connect();
+    s.emit('register', { fingerprint });
+  }
+  return s;
+}
+
+export function disconnectSocket(): void {
+  if (socket) {
+    socket.disconnect();
+    socket = null;
+  }
+}

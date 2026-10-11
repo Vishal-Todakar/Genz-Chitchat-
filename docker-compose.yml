@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ../Dockerfile.server
+    ports:
+      - '3001:3001'
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - CORS_ORIGIN=http://localhost:3000
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./client
+      dockerfile: ../Dockerfile.client
+    ports:
+      - '3000:80'
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  # Uncomment for Phase 4+
+  # postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_DB: genz_chitchat
+  #     POSTGRES_USER: genz
+  #     POSTGRES_PASSWORD: changeme
+  #   ports:
+  #     - '5432:5432'
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - '6379:6379'
+
+# volumes:
+#   pgdata:

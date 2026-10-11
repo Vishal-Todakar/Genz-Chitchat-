@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /chat
+Disallow: /admin
+
+Sitemap: https://genzchitchat.com/sitemap.xml
