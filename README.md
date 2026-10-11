@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 💬 Genz chitchat
 
 > A next-generation, privacy-first anonymous stranger chat platform with real-time text, peer-to-peer WebRTC video, interest-based matchmaking, and secure email verification passes.
@@ -619,3 +620,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ---
 
 *Made with passion for privacy, connection, and clean code.*
+=======
+# Genz-Chitchat-
+Real-time anonymous stranger chat web app built with React, Node.js and Socket.IO. Random matching, email OTP verification, moderation tools, and premium subscriptions
+>>>>>>> 11a33e15408e996b92009a90b4cf209f959981ee
